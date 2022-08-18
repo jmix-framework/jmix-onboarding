@@ -5,7 +5,9 @@
     <data>
         <instance id="userDc"
                   class="com.company.onboarding.entity.User">
-            <fetchPlan extends="_base"/>
+            <fetchPlan extends="_base">
+                <property name="department" fetchPlan="_base"/>
+            </fetchPlan>
             <loader/>
         </instance>
     </data>
@@ -41,6 +43,10 @@
                 <textField id="emailField" property="email"/>
                 <comboBox id="timeZoneField" property="timeZoneId"/>
                 <checkBox id="activeField" property="active"/>
+                <entityPicker id="departmentField" property="department"/>
+                <dateField id="joiningDateField" property="joiningDate"/>
+                <fileStorageUpload id="pictureField" property="picture"/>
+                <comboBox id="onboardingStatusField" property="onboardingStatus"/>
             </column>
         </form>
         <hbox id="editActions" spacing="true">
