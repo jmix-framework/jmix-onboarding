@@ -7,8 +7,10 @@
                   class="com.company.onboarding.entity.User">
             <fetchPlan extends="_base">
                 <property name="department" fetchPlan="_base"/>
+                <property name="steps" fetchPlan="_base"/>
             </fetchPlan>
             <loader/>
+            <collection id="stepsDc" property="steps"/>
         </instance>
         <collection id="departmentsDc" class="com.company.onboarding.entity.Department">
             <fetchPlan extends="_base"/>
@@ -61,6 +63,25 @@
                        scaleMode="CONTAIN" caption=""/>
             </column>
         </form>
+        <groupBox id="stepsBox" caption="msg://com.company.onboarding.entity/User.steps">
+            <table id="stepsTable" dataContainer="stepsDc" width="100%" height="200px">
+                <actions>
+                    <action id="create" type="create"/>
+                    <action id="edit" type="edit"/>
+                    <action id="remove" type="remove"/>
+                </actions>
+                <columns>
+                    <column id="version"/>
+                    <column id="dueDate"/>
+                    <column id="completedDate"/>
+                </columns>
+                <buttonsPanel>
+                    <button action="stepsTable.create"/>
+                    <button action="stepsTable.edit"/>
+                    <button action="stepsTable.remove"/>
+                </buttonsPanel>
+            </table>
+        </groupBox>
         <hbox id="editActions" spacing="true">
             <button id="commitAndCloseBtn" action="windowCommitAndClose"/>
             <button id="closeBtn" action="windowClose"/>
