@@ -1,5 +1,6 @@
 package com.company.onboarding.screen.user;
 
+import com.company.onboarding.entity.OnboardingStatus;
 import com.company.onboarding.entity.User;
 import io.jmix.core.EntityStates;
 import io.jmix.core.security.event.SingleUserPasswordChangeEvent;
@@ -55,6 +56,8 @@ public class UserEdit extends StandardEditor<User> {
         passwordField.setVisible(true);
         confirmPasswordField.setVisible(true);
         isNewEntity = true;
+
+        event.getEntity().setOnboardingStatus(OnboardingStatus.NOT_STARTED);
     }
 
     @Subscribe
