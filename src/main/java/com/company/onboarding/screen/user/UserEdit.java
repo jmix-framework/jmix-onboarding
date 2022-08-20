@@ -117,7 +117,7 @@ public class UserEdit extends StandardEditor<User> {
         }
 
         List<Step> steps = dataManager.load(Step.class)
-                .query("select s from Step s order by s.duration asc")
+                .query("select s from Step s order by s.sortValue asc")
                 .list();
 
         for (Step step : steps) {
@@ -126,6 +126,7 @@ public class UserEdit extends StandardEditor<User> {
                 userStep.setUser(user);
                 userStep.setStep(step);
                 userStep.setDueDate(user.getJoiningDate().plusDays(step.getDuration()));
+                userStep.setSortValue(step.getSortValue());
                 stepsDc.getMutableItems().add(userStep);
             }
         }

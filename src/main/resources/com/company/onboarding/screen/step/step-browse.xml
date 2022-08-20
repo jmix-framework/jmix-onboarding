@@ -9,7 +9,7 @@
             <fetchPlan extends="_base"/>
             <loader id="stepsDl">
                 <query>
-                    <![CDATA[select e from Step e order by e.duration]]>
+                    <![CDATA[select e from Step e order by e.sortValue]]>
                 </query>
             </loader>
         </collection>
@@ -37,7 +37,7 @@
         </filter>
         <groupTable id="stepsTable"
                     width="100%"
-                    dataContainer="stepsDc">
+                    dataContainer="stepsDc" sortable="false">
             <actions>
                 <action id="create" type="create"/>
                 <action id="edit" type="edit"/>

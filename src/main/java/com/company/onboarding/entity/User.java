@@ -74,6 +74,7 @@ public class User implements JmixUserDetails, HasTimeZone {
     @Column(name = "ONBOARDING_STATUS")
     private Integer onboardingStatus;
 
+    @OrderBy("sortValue")
     @Composition
     @OneToMany(mappedBy = "user")
     private List<UserStep> steps;

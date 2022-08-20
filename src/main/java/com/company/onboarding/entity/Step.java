@@ -29,6 +29,18 @@ public class Step {
     @Column(name = "DURATION")
     private Integer duration;
 
+    @Column(name = "SORT_VALUE", nullable = false)
+    @NotNull
+    private Integer sortValue;
+
+    public Integer getSortValue() {
+        return sortValue;
+    }
+
+    public void setSortValue(Integer sortValue) {
+        this.sortValue = sortValue;
+    }
+
     public Integer getDuration() {
         return duration;
     }

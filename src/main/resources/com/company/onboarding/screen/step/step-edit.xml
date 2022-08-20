@@ -29,6 +29,7 @@
             <column width="350px">
                 <textField id="nameField" property="name"/>
                 <textField id="durationField" property="duration"/>
+                <textField id="sortValueField" property="sortValue"/>
             </column>
         </form>
         <hbox id="editActions" spacing="true">

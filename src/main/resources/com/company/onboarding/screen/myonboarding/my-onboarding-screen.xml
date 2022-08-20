@@ -9,7 +9,8 @@
             <loader id="userStepsDl">
                 <query>
                     <![CDATA[select e from UserStep e
-                    where e.user = :user  ]]>
+                    where e.user = :user
+                    order by e.step.sortValue asc]]>
                 </query>
             </loader>
         </collection>
