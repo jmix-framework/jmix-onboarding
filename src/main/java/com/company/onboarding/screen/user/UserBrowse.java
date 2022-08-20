@@ -5,6 +5,7 @@ import io.jmix.ui.UiComponents;
 import io.jmix.ui.component.Component;
 import io.jmix.ui.component.FileStorageResource;
 import io.jmix.ui.component.Image;
+import io.jmix.ui.model.CollectionLoader;
 import io.jmix.ui.navigation.Route;
 import io.jmix.ui.screen.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,8 @@ public class UserBrowse extends StandardLookup<User> {
 
     @Autowired
     private UiComponents uiComponents;
+    @Autowired
+    private CollectionLoader<User> usersDl;
 
     @Install(to = "usersTable.picture", subject = "columnGenerator")
     private Component usersTablePictureColumnGenerator(User user) {
@@ -30,5 +33,15 @@ public class UserBrowse extends StandardLookup<User> {
         } else {
             return null;
         }
+    }
+
+    @Install(to = "usersTable.edit", subject = "afterCommitHandler")
+    private void usersTableEditAfterCommitHandler(User user) {
+        usersDl.load();
+    }
+
+    @Install(to = "usersTable.create", subject = "afterCommitHandler")
+    private void usersTableCreateAfterCommitHandler(User user) {
+        usersDl.load();
     }
 }
