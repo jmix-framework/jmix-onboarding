@@ -29,7 +29,7 @@
             </columns>
         </table>
         <hbox spacing="true">
-            <button id="saveButton" caption="Save"/>
+            <button id="saveButton" caption="Save" stylename="primary"/>
             <button id="discardButton" caption="Discard"/>
         </hbox>
         <label id="spacer"/>

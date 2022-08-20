@@ -78,14 +78,28 @@ public class MyOnboardingScreen extends Screen {
     private void updateLabels() {
         totalStepsLabel.setValue("Total steps: " + userStepsDc.getItems().size());
 
-        long completedCount = userStepsDc.getItems().stream().filter(us -> us.getCompletedDate() != null).count();
+        long completedCount = userStepsDc.getItems().stream()
+                .filter(us -> us.getCompletedDate() != null)
+                .count();
         completedStepsLabel.setValue("Completed steps: " + completedCount);
 
         long overdueCount = userStepsDc.getItems().stream()
-                .filter(us -> us.getCompletedDate() == null
-                        && us.getDueDate() != null
-                        && us.getDueDate().isBefore(LocalDate.now()))
+                .filter(us -> isOverdue(us))
                 .count();
         overdueStepsLabel.setValue("Overdue steps: " + overdueCount);
+    }
+
+    private boolean isOverdue(UserStep us) {
+        return us.getCompletedDate() == null
+                && us.getDueDate() != null
+                && us.getDueDate().isBefore(LocalDate.now());
+    }
+
+    @Install(to = "userStepsTable", subject = "styleProvider")
+    private String userStepsTableStyleProvider(UserStep entity, String property) {
+        if ("dueDate".equals(property) && isOverdue(entity)) {
+            return "overdue-step";
+        }
+        return null;
     }
 }
