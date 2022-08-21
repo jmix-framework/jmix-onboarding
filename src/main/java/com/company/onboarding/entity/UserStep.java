@@ -41,7 +41,8 @@ public class UserStep {
     @Column(name = "COMPLETED_DATE")
     private LocalDate completedDate;
 
-    @Column(name = "SORT_VALUE")
+    @NotNull
+    @Column(name = "SORT_VALUE", nullable = false)
     private Integer sortValue;
 
     public Integer getSortValue() {

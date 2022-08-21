@@ -8,7 +8,12 @@
             <map>
               <entry key="main">
                 <value>
-                  <DataStoreSettings />
+                  <DataStoreSettings>
+                    <option name="supportedTypes">
+                      <option value="postgres" />
+                      <option value="hsql" />
+                    </option>
+                  </DataStoreSettings>
                 </value>
               </entry>
             </map>

@@ -26,7 +26,8 @@ public class Step {
     @Column(name = "NAME", nullable = false)
     private String name;
 
-    @Column(name = "DURATION")
+    @NotNull
+    @Column(name = "DURATION", nullable = false)
     private Integer duration;
 
     @Column(name = "SORT_VALUE", nullable = false)
