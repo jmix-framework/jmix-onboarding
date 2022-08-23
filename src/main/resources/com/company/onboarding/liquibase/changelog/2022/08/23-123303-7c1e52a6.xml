@@ -16,6 +16,7 @@
             <column name="NAME" type="VARCHAR(255)">
                 <constraints nullable="false"/>
             </column>
+            <column name="HR_MANAGER_ID" type="UUID"/>
         </createTable>
     </changeSet>
     <changeSet id="2" author="onboarding">
@@ -72,6 +73,15 @@
         <addUniqueConstraint columnNames="NAME" constraintName="IDX_DEPARTMENT_UNQ_NAME" tableName="DEPARTMENT"/>
     </changeSet>
     <changeSet id="6" author="onboarding">
+        <createIndex indexName="IDX_DEPARTMENT_HR_MANAGER" tableName="DEPARTMENT">
+            <column name="HR_MANAGER_ID"/>
+        </createIndex>
+
+        <addForeignKeyConstraint baseColumnNames="HR_MANAGER_ID" baseTableName="DEPARTMENT"
+                                 constraintName="FK_DEPARTMENT_ON_HR_MANAGER" referencedColumnNames="ID"
+                                 referencedTableName="USER_"/>
+    </changeSet>
+    <changeSet id="7" author="onboarding">
         <createIndex indexName="IDX_USER_STEP_STEP" tableName="USER_STEP">
             <column name="STEP_ID"/>
         </createIndex>
@@ -80,7 +90,7 @@
                                  constraintName="FK_USER_STEP_ON_STEP" referencedColumnNames="ID"
                                  referencedTableName="STEP"/>
     </changeSet>
-    <changeSet id="7" author="onboarding">
+    <changeSet id="8" author="onboarding">
         <createIndex indexName="IDX_USER_STEP_USER" tableName="USER_STEP">
             <column name="USER_ID"/>
         </createIndex>
@@ -89,7 +99,7 @@
                                  constraintName="FK_USER_STEP_ON_USER" referencedColumnNames="ID"
                                  referencedTableName="USER_"/>
     </changeSet>
-    <changeSet id="8" author="onboarding">
+    <changeSet id="9" author="onboarding">
         <createIndex indexName="IDX_USER__DEPARTMENT" tableName="USER_">
             <column name="DEPARTMENT_ID"/>
         </createIndex>
