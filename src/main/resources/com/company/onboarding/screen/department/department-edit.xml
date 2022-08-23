@@ -5,7 +5,9 @@
     <data>
         <instance id="departmentDc"
                   class="com.company.onboarding.entity.Department">
-            <fetchPlan extends="_base"/>
+            <fetchPlan extends="_base">
+                <property name="hrManager" fetchPlan="_base"/>
+            </fetchPlan>
             <loader/>
         </instance>
     </data>
@@ -28,6 +30,16 @@
         <form id="form" dataContainer="departmentDc">
             <column width="350px">
                 <textField id="nameField" property="name"/>
+                <entityPicker id="hrManagerField" property="hrManager">
+                    <actions>
+                        <action id="entity_lookup" type="entity_lookup">
+                            <properties>
+                                <property name="openMode" value="DIALOG"/>
+                            </properties>
+                        </action>
+                        <action id="entity_clear" type="entity_clear"/>
+                    </actions>
+                </entityPicker>
             </column>
         </form>
         <hbox id="editActions" spacing="true">

@@ -11,8 +11,9 @@ import io.jmix.security.role.annotation.ResourceRole;
 import io.jmix.securityui.role.annotation.MenuPolicy;
 import io.jmix.securityui.role.annotation.ScreenPolicy;
 
-@ResourceRole(name = "Employee", code = "employee", scope = "UI")
-public interface EmployeeRole {
+@ResourceRole(name = "New Employee", code = "new-employee", scope = "UI")
+public interface NewEmployeeRole {
+
     @MenuPolicy(menuIds = "MyOnboardingScreen")
     @ScreenPolicy(screenIds = "MyOnboardingScreen")
     void screens();

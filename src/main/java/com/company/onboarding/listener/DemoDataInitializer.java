@@ -7,6 +7,7 @@ import io.jmix.core.FileStorage;
 import io.jmix.core.SaveContext;
 import io.jmix.core.security.Authenticated;
 import io.jmix.security.role.assignment.RoleAssignment;
+import io.jmix.security.role.assignment.RoleAssignmentRoleType;
 import io.jmix.securitydata.entity.ResourceRoleEntity;
 import io.jmix.securitydata.entity.RoleAssignmentEntity;
 import io.jmix.securityui.role.UiMinimalRole;
@@ -21,6 +22,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Component
@@ -134,6 +136,36 @@ public class DemoDataInitializer {
         }
         dataManager.save(saveContext);
 
+        Department marketingDept = departments.get(1);
+        marketingDept.setHrManager(user);
+        dataManager.save(marketingDept);
+
+        saveContext = new SaveContext();
+        user = dataManager.create(User.class);
+        user.setUsername("james");
+        user.setPassword(createPassword());
+        user.setFirstName("James");
+        user.setLastName("Wilson");
+        user.setDepartment(departments.get(0));
+        user.setJoiningDate(LocalDate.now().minusYears(1).minusWeeks(5));
+        user.setPicture(uploadPicture("com/company/onboarding/demo/" , "james.png"));
+        saveContext.saving(user);
+        list.add(user);
+        for (Step step : steps) {
+            UserStep userStep = dataManager.create(UserStep.class);
+            userStep.setUser(user);
+            userStep.setStep(step);
+            userStep.setDueDate(user.getJoiningDate().plusDays(step.getDuration()));
+            userStep.setCompletedDate(user.getJoiningDate().plusDays(step.getDuration() - 1));
+            userStep.setSortValue(step.getSortValue());
+            saveContext.saving(userStep);
+        }
+        dataManager.save(saveContext);
+
+        Department operationsDept = departments.get(2);
+        operationsDept.setHrManager(user);
+        dataManager.save(operationsDept);
+
         saveContext = new SaveContext();
         user = dataManager.create(User.class);
         user.setUsername("mary");
@@ -143,6 +175,50 @@ public class DemoDataInitializer {
         user.setDepartment(departments.get(1));
         user.setJoiningDate(LocalDate.now().minusDays(3));
         user.setPicture(uploadPicture("com/company/onboarding/demo/", "mary.png"));
+        saveContext.saving(user);
+        list.add(user);
+        for (Step step : steps) {
+            UserStep userStep = dataManager.create(UserStep.class);
+            userStep.setUser(user);
+            userStep.setStep(step);
+            userStep.setDueDate(user.getJoiningDate().plusDays(step.getDuration()));
+            userStep.setCompletedDate(null);
+            userStep.setSortValue(step.getSortValue());
+            saveContext.saving(userStep);
+        }
+        dataManager.save(saveContext);
+
+        saveContext = new SaveContext();
+        user = dataManager.create(User.class);
+        user.setUsername("linda");
+        user.setPassword(createPassword());
+        user.setFirstName("Linda");
+        user.setLastName("Evans");
+        user.setDepartment(departments.get(2));
+        user.setJoiningDate(LocalDate.now().minusDays(2));
+        user.setPicture(uploadPicture("com/company/onboarding/demo/", "linda.png"));
+        saveContext.saving(user);
+        list.add(user);
+        for (Step step : steps) {
+            UserStep userStep = dataManager.create(UserStep.class);
+            userStep.setUser(user);
+            userStep.setStep(step);
+            userStep.setDueDate(user.getJoiningDate().plusDays(step.getDuration()));
+            userStep.setCompletedDate(null);
+            userStep.setSortValue(step.getSortValue());
+            saveContext.saving(userStep);
+        }
+        dataManager.save(saveContext);
+
+        saveContext = new SaveContext();
+        user = dataManager.create(User.class);
+        user.setUsername("susan");
+        user.setPassword(createPassword());
+        user.setFirstName("Susan");
+        user.setLastName("Baker");
+        user.setDepartment(departments.get(2));
+        user.setJoiningDate(LocalDate.now());
+        user.setPicture(uploadPicture("com/company/onboarding/demo/", "susan.png"));
         saveContext.saving(user);
         list.add(user);
         for (Step step : steps) {
@@ -196,19 +272,29 @@ public class DemoDataInitializer {
 
     private void assignRoles(List<User> users) {
         for (User user : users) {
+            boolean isHrManager = Arrays.asList("alice", "james").contains(user.getUsername());
+
             RoleAssignmentEntity roleAssignment;
 
             roleAssignment = dataManager.create(RoleAssignmentEntity.class);
             roleAssignment.setUsername(user.getUsername());
             roleAssignment.setRoleCode("ui-minimal");
-            roleAssignment.setRoleType("resource");
+            roleAssignment.setRoleType(RoleAssignmentRoleType.RESOURCE);
             dataManager.save(roleAssignment);
 
             roleAssignment = dataManager.create(RoleAssignmentEntity.class);
             roleAssignment.setUsername(user.getUsername());
-            roleAssignment.setRoleCode("employee");
-            roleAssignment.setRoleType("resource");
+            roleAssignment.setRoleCode(isHrManager ? "hr-manager" : "new-employee");
+            roleAssignment.setRoleType(RoleAssignmentRoleType.RESOURCE);
             dataManager.save(roleAssignment);
+
+            if (isHrManager) {
+                roleAssignment = dataManager.create(RoleAssignmentEntity.class);
+                roleAssignment.setUsername(user.getUsername());
+                roleAssignment.setRoleCode("hr-manager-rl");
+                roleAssignment.setRoleType(RoleAssignmentRoleType.ROW_LEVEL);
+                dataManager.save(roleAssignment);
+            }
         }
     }
 }
