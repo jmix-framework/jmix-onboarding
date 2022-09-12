@@ -10,8 +10,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-
 @Component
 public class UserStepEventListener {
 
@@ -20,23 +18,30 @@ public class UserStepEventListener {
 
     @EventListener
     public void onUserStepChangedBeforeCommit(EntityChangedEvent<UserStep> event) {
-        if (event.getType() == EntityChangedEvent.Type.CREATED || event.getType() == EntityChangedEvent.Type.UPDATED) {
+        User user;
+        if (event.getType() != EntityChangedEvent.Type.DELETED) {
             Id<UserStep> userStepId = event.getEntityId();
-
             UserStep userStep = dataManager.load(userStepId).one();
-            User user = userStep.getUser();
-            List<UserStep> allUserSteps = user.getSteps();
-
-            long completedCount = allUserSteps.stream().filter(us -> us.getCompletedDate() != null).count();
-            if (completedCount == 0) {
-                user.setOnboardingStatus(OnboardingStatus.NOT_STARTED);
-            } else if (completedCount == allUserSteps.size()) {
-                user.setOnboardingStatus(OnboardingStatus.COMPLETED);
-            } else {
-                user.setOnboardingStatus(OnboardingStatus.IN_PROGRESS);
+            user = userStep.getUser();
+        } else {
+            Id<User> userId = event.getChanges().getOldReferenceId("user");
+            if (userId == null) {
+                throw new IllegalStateException("Cannot get User from deleted UserStep");
             }
-
-            dataManager.save(user);
+            user = dataManager.load(userId).one();
         }
+
+        long completedCount = user.getSteps().stream()
+                .filter(us -> us.getCompletedDate() != null)
+                .count();
+        if (completedCount == 0) {
+            user.setOnboardingStatus(OnboardingStatus.NOT_STARTED);
+        } else if (completedCount == user.getSteps().size()) {
+            user.setOnboardingStatus(OnboardingStatus.COMPLETED);
+        } else {
+            user.setOnboardingStatus(OnboardingStatus.IN_PROGRESS);
+        }
+
+        dataManager.save(user);
     }
 }
