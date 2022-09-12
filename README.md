@@ -1,6 +1,6 @@
 # Jmix Onboarding
 
-This repository contains the complete source code of the example application built in Jmix Tutorial.
+This repository contains the complete source code of the example application built in [Jmix Tutorial](https://docs.jmix.io/jmix/tutorial/).
 
 ## Overview
 
@@ -10,21 +10,6 @@ The application is designed to automate the onboarding process for new employees
 - Department - the organization department the user belongs to.
 - Step - the onboarding step to complete for a new employee.
 - UserStep - the onboarding step of a particular user.
-
-### ER-diagram
-
-![](doc/er-iagram.drawio.svg)
-
-### Administrator UI
-
-![](doc/admin-ui-1.png)
-
-![](doc/admin-ui-2.png)
-
-### Employee UI
-
-![](doc/employee-ui-1.png)
-
 
 ## How to run
 
