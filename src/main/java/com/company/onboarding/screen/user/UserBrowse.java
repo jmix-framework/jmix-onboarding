@@ -34,14 +34,4 @@ public class UserBrowse extends StandardLookup<User> {
             return null;
         }
     }
-
-    @Install(to = "usersTable.edit", subject = "afterCommitHandler")
-    private void usersTableEditAfterCommitHandler(User user) {
-        usersDl.load();
-    }
-
-    @Install(to = "usersTable.create", subject = "afterCommitHandler")
-    private void usersTableCreateAfterCommitHandler(User user) {
-        usersDl.load();
-    }
 }

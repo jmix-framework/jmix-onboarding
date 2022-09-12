@@ -10,8 +10,10 @@ import io.jmix.core.security.event.SingleUserPasswordChangeEvent;
 import io.jmix.ui.Notifications;
 import io.jmix.ui.UiComponents;
 import io.jmix.ui.component.*;
+import io.jmix.ui.model.CollectionContainer;
 import io.jmix.ui.model.CollectionPropertyContainer;
 import io.jmix.ui.model.DataContext;
+import io.jmix.ui.model.InstanceContainer;
 import io.jmix.ui.navigation.Route;
 import io.jmix.ui.screen.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -144,5 +146,31 @@ public class UserEdit extends StandardEditor<User> {
             }
         });
         return checkBox;
+    }
+
+    @Subscribe(id = "stepsDc", target = Target.DATA_CONTAINER)
+    public void onStepsDcItemPropertyChange(InstanceContainer.ItemPropertyChangeEvent<UserStep> event) {
+        updateOnboardingStatus();
+    }
+
+    @Subscribe(id = "stepsDc", target = Target.DATA_CONTAINER)
+    public void onStepsDcCollectionChange(CollectionContainer.CollectionChangeEvent<UserStep> event) {
+        updateOnboardingStatus();
+    }
+
+    private void updateOnboardingStatus() {
+        User user = getEditedEntity();
+
+        long completedCount = user.getSteps() == null ? 0 :
+                user.getSteps().stream()
+                        .filter(us -> us.getCompletedDate() != null)
+                        .count();
+        if (completedCount == 0) {
+            user.setOnboardingStatus(OnboardingStatus.NOT_STARTED);
+        } else if (completedCount == user.getSteps().size()) {
+            user.setOnboardingStatus(OnboardingStatus.COMPLETED);
+        } else {
+            user.setOnboardingStatus(OnboardingStatus.IN_PROGRESS);
+        }
     }
 }
