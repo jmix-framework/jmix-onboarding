@@ -1,14 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<menu-config xmlns="http://jmix.io/schema/ui/menu">
+<menu-config xmlns="http://jmix.io/schema/flowui/menu">
 
-    <menu id="application" caption="msg://com.company.onboarding/menu.application" insertBefore="administration">
-        <item screen="MyOnboardingScreen"
-              caption="msg://com.company.onboarding.screen.myonboarding/myOnboardingScreen.caption"/>
-        <item screen="User.browse" caption="msg://com.company.onboarding.screen.user/UserBrowse.caption"/>
-        <item screen="Department.browse"
-              caption="msg://com.company.onboarding.screen.department/departmentBrowse.menu"/>
-        <item screen="Step.browse" caption="msg://com.company.onboarding.screen.step/stepBrowse.menu"/>
-        <item screen="themeSettingsScreen" caption="msg://io.jmix.ui.app.themesettings/themeSettings.caption"/>
+    <menu id="application" title="msg://com.company.onboarding/menu.application.title" opened="true" insertBefore="administration">
+        <item view="User.list" title="msg://com.company.onboarding.view.user/UserListView.title"/>
     </menu>
 
 </menu-config>

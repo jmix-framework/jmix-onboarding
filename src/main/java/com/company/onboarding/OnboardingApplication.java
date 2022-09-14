@@ -1,6 +1,9 @@
 package com.company.onboarding;
 
 import com.google.common.base.Strings;
+import com.vaadin.flow.component.page.AppShellConfigurator;
+import com.vaadin.flow.server.PWA;
+import com.vaadin.flow.theme.Theme;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
@@ -15,8 +18,10 @@ import org.springframework.core.env.Environment;
 
 import javax.sql.DataSource;
 
+@Theme(value = "onboarding")
+@PWA(name = "Onboarding", shortName = "Onboarding")
 @SpringBootApplication
-public class OnboardingApplication {
+public class OnboardingApplication implements AppShellConfigurator {
 
     @Autowired
     private Environment environment;

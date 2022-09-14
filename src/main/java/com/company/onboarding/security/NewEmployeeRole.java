@@ -8,14 +8,12 @@ import io.jmix.security.model.EntityPolicyAction;
 import io.jmix.security.role.annotation.EntityAttributePolicy;
 import io.jmix.security.role.annotation.EntityPolicy;
 import io.jmix.security.role.annotation.ResourceRole;
-import io.jmix.securityui.role.annotation.MenuPolicy;
-import io.jmix.securityui.role.annotation.ScreenPolicy;
 
 @ResourceRole(name = "New Employee", code = "new-employee", scope = "UI")
 public interface NewEmployeeRole {
 
-    @MenuPolicy(menuIds = "MyOnboardingScreen")
-    @ScreenPolicy(screenIds = "MyOnboardingScreen")
+//    @MenuPolicy(menuIds = "MyOnboardingScreen")
+//    @ViewPolicy(viewIds = "MyOnboardingScreen")
     void screens();
 
     @EntityAttributePolicy(entityClass = Step.class, attributes = "*", action = EntityAttributePolicyAction.VIEW)

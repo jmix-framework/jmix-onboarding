@@ -9,13 +9,13 @@ import io.jmix.security.model.EntityPolicyAction;
 import io.jmix.security.role.annotation.EntityAttributePolicy;
 import io.jmix.security.role.annotation.EntityPolicy;
 import io.jmix.security.role.annotation.ResourceRole;
-import io.jmix.securityui.role.annotation.MenuPolicy;
-import io.jmix.securityui.role.annotation.ScreenPolicy;
+import io.jmix.securityflowui.role.annotation.MenuPolicy;
+import io.jmix.securityflowui.role.annotation.ViewPolicy;
 
 @ResourceRole(name = "HR Manager", code = "hr-manager", scope = "UI")
 public interface HrManagerRole {
-    @MenuPolicy(menuIds = "User.browse")
-    @ScreenPolicy(screenIds = {"User.browse", "User.edit"})
+    @MenuPolicy(menuIds = "User.list")
+    @ViewPolicy(viewIds = {"User.list", "User.detail"})
     void screens();
 
     @EntityAttributePolicy(entityClass = User.class, attributes = "*", action = EntityAttributePolicyAction.MODIFY)

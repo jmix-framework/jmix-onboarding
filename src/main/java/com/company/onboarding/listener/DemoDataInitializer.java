@@ -1,22 +1,22 @@
 package com.company.onboarding.listener;
 
-import com.company.onboarding.entity.*;
+import com.company.onboarding.entity.Department;
+import com.company.onboarding.entity.Step;
+import com.company.onboarding.entity.User;
+import com.company.onboarding.entity.UserStep;
 import io.jmix.core.DataManager;
 import io.jmix.core.FileRef;
 import io.jmix.core.FileStorage;
 import io.jmix.core.SaveContext;
 import io.jmix.core.security.Authenticated;
-import io.jmix.security.role.assignment.RoleAssignment;
 import io.jmix.security.role.assignment.RoleAssignmentRoleType;
-import io.jmix.securitydata.entity.ResourceRoleEntity;
 import io.jmix.securitydata.entity.RoleAssignmentEntity;
-import io.jmix.securityui.role.UiMinimalRole;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationStartedEvent;
+import org.springframework.context.event.EventListener;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
-import org.springframework.context.event.EventListener;
 
 import java.io.IOException;
 import java.io.InputStream;
