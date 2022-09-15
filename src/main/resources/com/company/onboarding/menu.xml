@@ -3,6 +3,8 @@
 
     <menu id="application" title="msg://com.company.onboarding/menu.application.title" opened="true" insertBefore="administration">
         <item view="User.list" title="msg://com.company.onboarding.view.user/UserListView.title"/>
+        <item view="Step.list" title="msg://com.company.onboarding.view.step/stepListView.title"/>
+        <item view="Department.list" title="msg://com.company.onboarding.view.department/departmentListView.title"/>
     </menu>
 
 </menu-config>
