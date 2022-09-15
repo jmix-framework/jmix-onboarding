@@ -1,5 +1,6 @@
 package com.company.onboarding.view.user;
 
+import com.company.onboarding.entity.OnboardingStatus;
 import com.company.onboarding.entity.User;
 import com.company.onboarding.view.main.MainView;
 import com.vaadin.flow.component.combobox.ComboBox;
@@ -50,6 +51,8 @@ public class UserDetailView extends StandardDetailView<User> {
         usernameField.setReadOnly(false);
         passwordField.setVisible(true);
         confirmPasswordField.setVisible(true);
+
+        event.getEntity().setOnboardingStatus(OnboardingStatus.NOT_STARTED);
     }
 
     @Subscribe

@@ -32,6 +32,7 @@
             <textField id="emailField" property="email"/>
             <comboBox id="timeZoneField" property="timeZoneId"/>
             <checkbox id="activeField" property="active"/>
+            <comboBox id="onboardingStatusField" property="onboardingStatus"/>
         </formLayout>
         <hbox id="detailActions">
             <button id="commitAndCloseBtn" action="commitAction"/>
