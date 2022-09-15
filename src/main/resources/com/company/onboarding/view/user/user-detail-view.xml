@@ -5,9 +5,20 @@
     <data>
         <instance id="userDc"
                   class="com.company.onboarding.entity.User">
-            <fetchPlan extends="_base"/>
+            <fetchPlan extends="_base">
+                <property name="department" fetchPlan="_base"/>
+            </fetchPlan>
             <loader/>
         </instance>
+        <collection id="departmentsDc" class="com.company.onboarding.entity.Department">
+            <fetchPlan extends="_base"/>
+            <loader>
+                <query>
+                    <![CDATA[select e from Department e
+                    order by e.name asc]]>
+                </query>
+            </loader>
+        </collection>
     </data>
     <actions>
         <action id="commitAction" type="detail_commitClose"/>
@@ -33,6 +44,7 @@
             <comboBox id="timeZoneField" property="timeZoneId"/>
             <checkbox id="activeField" property="active"/>
             <comboBox id="onboardingStatusField" property="onboardingStatus"/>
+            <entityComboBox id="departmentField" property="department" itemsContainer="departmentsDc"/>
         </formLayout>
         <hbox id="detailActions">
             <button id="commitAndCloseBtn" action="commitAction"/>
