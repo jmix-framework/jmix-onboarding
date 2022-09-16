@@ -19,8 +19,10 @@ import io.jmix.flowui.Notifications;
 import io.jmix.flowui.UiComponents;
 import io.jmix.flowui.component.grid.DataGrid;
 import io.jmix.flowui.component.textfield.TypedTextField;
+import io.jmix.flowui.model.CollectionContainer;
 import io.jmix.flowui.model.CollectionPropertyContainer;
 import io.jmix.flowui.model.DataContext;
+import io.jmix.flowui.model.InstanceContainer;
 import io.jmix.flowui.view.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -142,6 +144,32 @@ public class UserDetailView extends StandardDetailView<User> {
                 userStep.setSortValue(step.getSortValue());
                 stepsDc.getMutableItems().add(userStep);
             }
+        }
+    }
+
+    @Subscribe(id = "stepsDc", target = Target.DATA_CONTAINER)
+    public void onStepsDcCollectionChange(CollectionContainer.CollectionChangeEvent<UserStep> event) {
+        updateOnboardingStatus();
+    }
+
+    @Subscribe(id = "stepsDc", target = Target.DATA_CONTAINER)
+    public void onStepsDcItemPropertyChange(InstanceContainer.ItemPropertyChangeEvent<UserStep> event) {
+        updateOnboardingStatus();
+    }
+
+    private void updateOnboardingStatus() {
+        User user = getEditedEntity();
+
+        long completedCount = user.getSteps() == null ? 0 :
+                user.getSteps().stream()
+                        .filter(us -> us.getCompletedDate() != null)
+                        .count();
+        if (completedCount == 0) {
+            user.setOnboardingStatus(OnboardingStatus.NOT_STARTED);
+        } else if (completedCount == user.getSteps().size()) {
+            user.setOnboardingStatus(OnboardingStatus.COMPLETED);
+        } else {
+            user.setOnboardingStatus(OnboardingStatus.IN_PROGRESS);
         }
     }
 }
