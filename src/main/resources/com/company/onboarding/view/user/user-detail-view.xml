@@ -45,8 +45,9 @@
             <textField id="emailField" property="email"/>
             <comboBox id="timeZoneField" property="timeZoneId"/>
             <checkbox id="activeField" property="active"/>
-            <comboBox id="onboardingStatusField" property="onboardingStatus"/>
             <entityComboBox id="departmentField" property="department" itemsContainer="departmentsDc"/>
+            <datePicker id="joiningDateField" property="joiningDate"/>
+            <comboBox id="onboardingStatusField" property="onboardingStatus"/>
         </formLayout>
         <hbox>
             <button id="generateStepsButton" text="Generate"/>
