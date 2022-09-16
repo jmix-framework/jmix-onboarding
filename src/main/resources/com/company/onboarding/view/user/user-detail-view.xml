@@ -7,8 +7,10 @@
                   class="com.company.onboarding.entity.User">
             <fetchPlan extends="_base">
                 <property name="department" fetchPlan="_base"/>
+                <property name="steps" fetchPlan="_base"/>
             </fetchPlan>
             <loader/>
+            <collection id="stepsDc" property="steps"/>
         </instance>
         <collection id="departmentsDc" class="com.company.onboarding.entity.Department">
             <fetchPlan extends="_base"/>
@@ -46,6 +48,20 @@
             <comboBox id="onboardingStatusField" property="onboardingStatus"/>
             <entityComboBox id="departmentField" property="department" itemsContainer="departmentsDc"/>
         </formLayout>
+        <hbox>
+            <button id="generateStepsButton" text="Generate"/>
+            <button action="stepsDataGrid.remove"/>
+        </hbox>
+        <dataGrid width="100%" dataContainer="stepsDc" minHeight="10em" id="stepsDataGrid">
+            <columns>
+                <column property="step"/>
+                <column property="dueDate"/>
+                <column property="completedDate"/>
+            </columns>
+            <actions>
+                <action id="remove" type="remove"/>
+            </actions>
+        </dataGrid>
         <hbox id="detailActions">
             <button id="commitAndCloseBtn" action="commitAction"/>
             <button id="closeBtn" action="closeAction"/>

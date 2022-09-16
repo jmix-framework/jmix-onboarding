@@ -3,6 +3,8 @@ package com.company.onboarding.view.user;
 import com.company.onboarding.entity.OnboardingStatus;
 import com.company.onboarding.entity.User;
 import com.company.onboarding.view.main.MainView;
+import com.vaadin.flow.component.ClickEvent;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.combobox.ComboBox;
 import com.vaadin.flow.component.textfield.PasswordField;
 import com.vaadin.flow.router.Route;
@@ -73,5 +75,10 @@ public class UserDetailView extends StandardDetailView<User> {
             }
             getEditedEntity().setPassword(passwordEncoder.encode(passwordField.getValue()));
         }
+    }
+
+    @Subscribe("generateStepsButton")
+    public void onGenerateStepsButtonClick(ClickEvent<Button> event) {
+
     }
 }
