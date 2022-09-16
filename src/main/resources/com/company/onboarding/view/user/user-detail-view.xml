@@ -7,7 +7,9 @@
                   class="com.company.onboarding.entity.User">
             <fetchPlan extends="_base">
                 <property name="department" fetchPlan="_base"/>
-                <property name="steps" fetchPlan="_base"/>
+                <property name="steps" fetchPlan="_base">
+                    <property name="step" fetchPlan="_base"/>
+                </property>
             </fetchPlan>
             <loader/>
             <collection id="stepsDc" property="steps"/>
