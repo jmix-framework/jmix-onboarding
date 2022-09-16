@@ -7,21 +7,26 @@ import com.company.onboarding.entity.UserStep;
 import com.company.onboarding.view.main.MainView;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.combobox.ComboBox;
+import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.textfield.PasswordField;
+import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.router.Route;
 import io.jmix.core.DataManager;
 import io.jmix.core.EntityStates;
 import io.jmix.flowui.Notifications;
+import io.jmix.flowui.UiComponents;
+import io.jmix.flowui.component.grid.DataGrid;
 import io.jmix.flowui.component.textfield.TypedTextField;
-import io.jmix.flowui.model.CollectionContainer;
 import io.jmix.flowui.model.CollectionPropertyContainer;
 import io.jmix.flowui.model.DataContext;
-import io.jmix.flowui.model.InstanceContainer;
 import io.jmix.flowui.view.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 import java.util.TimeZone;
@@ -56,10 +61,33 @@ public class UserDetailView extends StandardDetailView<User> {
     private CollectionPropertyContainer<UserStep> stepsDc;
     @ViewComponent
     private DataContext dataContext;
+    @ViewComponent
+    private DataGrid<UserStep> stepsDataGrid;
+    @Autowired
+    private UiComponents uiComponents;
 
     @Subscribe
     public void onInit(InitEvent event) {
         timeZoneField.setItems(List.of(TimeZone.getAvailableIDs()));
+
+        Grid.Column<UserStep> checkboxColumn = stepsDataGrid.addColumn(new ComponentRenderer<>(userStep -> {
+                    Checkbox checkbox = uiComponents.create(Checkbox.class);
+                    checkbox.setValue(userStep.getCompletedDate() != null);
+                    checkbox.addValueChangeListener(e -> {
+                        if (userStep.getCompletedDate() == null) {
+                            userStep.setCompletedDate(LocalDate.now());
+                        } else {
+                            userStep.setCompletedDate(null);
+                        }
+                    });
+                    return checkbox;
+                }))
+                .setWidth("50px"); // width doesn't work
+
+        List<Grid.Column<UserStep>> columns = new ArrayList<>(stepsDataGrid.getColumns());
+        columns.remove(checkboxColumn);
+        columns.add(0, checkboxColumn);
+        stepsDataGrid.setColumnOrder(columns);
     }
 
     @Subscribe
