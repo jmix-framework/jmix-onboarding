@@ -16,7 +16,7 @@ import io.jmix.securityflowui.role.annotation.ViewPolicy;
 public interface HrManagerRole {
     @MenuPolicy(menuIds = "User.list")
     @ViewPolicy(viewIds = {"User.list", "User.detail"})
-    void screens();
+    void views();
 
     @EntityAttributePolicy(entityClass = User.class, attributes = "*", action = EntityAttributePolicyAction.MODIFY)
     @EntityPolicy(entityClass = User.class, actions = EntityPolicyAction.ALL)

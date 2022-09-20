@@ -278,7 +278,7 @@ public class DemoDataInitializer {
 
             roleAssignment = dataManager.create(RoleAssignmentEntity.class);
             roleAssignment.setUsername(user.getUsername());
-            roleAssignment.setRoleCode("ui-minimal");
+            roleAssignment.setRoleCode("flowui-minimal");
             roleAssignment.setRoleType(RoleAssignmentRoleType.RESOURCE);
             dataManager.save(roleAssignment);
 
