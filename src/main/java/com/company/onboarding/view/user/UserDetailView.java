@@ -130,7 +130,7 @@ public class UserDetailView extends StandardDetailView<User> {
     }
 
     @Subscribe
-    public void onAfterShow(AfterShowEvent event) {
+    public void onReady(ReadyEvent event) {
         if (entityStates.isNew(getEditedEntity())) {
             usernameField.focus();
         }
