@@ -15,7 +15,7 @@
         <dataLoadCoordinator auto="true"/>
     </facets>
     <actions>
-        <action id="commitAction" type="detail_commitClose"/>
+        <action id="saveAction" type="detail_saveClose"/>
         <action id="closeAction" type="detail_close"/>
     </actions>
     <layout>
@@ -29,7 +29,7 @@
             </entityPicker>
         </formLayout>
         <hbox id="detailActions">
-            <button id="commitAndCloseBtn" action="commitAction"/>
+            <button id="commitAndCloseBtn" action="saveAction"/>
             <button id="closeBtn" action="closeAction"/>
         </hbox>
     </layout>

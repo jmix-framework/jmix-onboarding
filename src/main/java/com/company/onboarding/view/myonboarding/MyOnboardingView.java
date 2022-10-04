@@ -109,8 +109,8 @@ public class MyOnboardingView extends StandardView {
 
     @Subscribe("saveButton")
     public void onSaveButtonClick(ClickEvent<Button> event) {
-        dataContext.commit();
-        close(StandardOutcome.COMMIT);
+        dataContext.save();
+        close(StandardOutcome.SAVE);
     }
 
     @Subscribe("discardButton")

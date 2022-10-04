@@ -149,13 +149,13 @@ public class UserDetailView extends StandardDetailView<User> {
     }
 
     @Subscribe
-    protected void onBeforeCommit(BeforeCommitChangesEvent event) {
+    protected void onBeforeCommit(BeforeSaveEvent event) {
         if (entityStates.isNew(getEditedEntity())) {
             if (!Objects.equals(passwordField.getValue(), confirmPasswordField.getValue())) {
                 notifications.create(messageBundle.getMessage("passwordsDoNotMatch"))
                         .withType(Notifications.Type.WARNING)
                         .show();
-                event.preventCommit();
+                event.preventSave();
             }
             getEditedEntity().setPassword(passwordEncoder.encode(passwordField.getValue()));
         }
