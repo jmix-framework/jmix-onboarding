@@ -28,7 +28,7 @@
             </columns>
         </dataGrid>
         <hbox>
-            <button id="saveButton" text="Save" themeName="primary"/>
+            <button id="saveButton" text="Save" themeNames="primary"/>
             <button id="discardButton" text="Discard"/>
         </hbox>
     </layout>

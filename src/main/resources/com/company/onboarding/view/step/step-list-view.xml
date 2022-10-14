@@ -22,7 +22,7 @@
         <action id="discardAction" type="lookup_discard"/>
     </actions>
     <layout>
-        <hbox id="buttonsPanel" className="buttons-panel">
+        <hbox id="buttonsPanel" classNames="buttons-panel">
             <button id="createBtn" action="stepsTable.create"/>
             <button id="editBtn" action="stepsTable.edit"/>
             <button id="removeBtn" action="stepsTable.remove"/>

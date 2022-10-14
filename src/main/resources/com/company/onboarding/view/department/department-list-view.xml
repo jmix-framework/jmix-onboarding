@@ -24,10 +24,11 @@
         <action id="discardAction" type="lookup_discard"/>
     </actions>
     <layout>
-        <hbox id="buttonsPanel" className="buttons-panel">
+        <hbox id="buttonsPanel" classNames="buttons-panel">
             <button id="createBtn" action="departmentsTable.create"/>
             <button id="editBtn" action="departmentsTable.edit"/>
             <button id="removeBtn" action="departmentsTable.remove"/>
+            <simplePagination dataLoader="departmentsDl"/>
         </hbox>
         <dataGrid id="departmentsTable"
                   width="100%"
