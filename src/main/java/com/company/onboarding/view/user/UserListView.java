@@ -1,8 +1,6 @@
 package com.company.onboarding.view.user;
 
 import com.company.onboarding.entity.User;
-import com.company.onboarding.entity.UserStep;
-import com.company.onboarding.view.DataGridHelper;
 import com.company.onboarding.view.main.MainView;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Image;
@@ -16,9 +14,6 @@ import io.jmix.flowui.UiComponents;
 import io.jmix.flowui.component.grid.DataGrid;
 import io.jmix.flowui.view.*;
 import org.springframework.beans.factory.annotation.Autowired;
-
-import java.util.ArrayList;
-import java.util.List;
 
 @Route(value = "users", layout = MainView.class)
 @ViewController("User.list")
@@ -55,6 +50,6 @@ public class UserListView extends StandardListView<User> {
             }
         }));
 
-        DataGridHelper.setDataGridColumnPosition(usersTable, pictureColumn, 0);
+        usersTable.setColumnPosition(pictureColumn, 0);
     }
 }

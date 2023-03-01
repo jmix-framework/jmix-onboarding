@@ -2,7 +2,6 @@ package com.company.onboarding.view.myonboarding;
 
 import com.company.onboarding.entity.User;
 import com.company.onboarding.entity.UserStep;
-import com.company.onboarding.view.DataGridHelper;
 import com.company.onboarding.view.main.MainView;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.button.Button;
@@ -10,7 +9,6 @@ import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
-import com.vaadin.flow.function.SerializableFunction;
 import com.vaadin.flow.router.Route;
 import io.jmix.core.security.CurrentAuthentication;
 import io.jmix.flowui.UiComponents;
@@ -21,7 +19,6 @@ import io.jmix.flowui.model.DataContext;
 import io.jmix.flowui.model.InstanceContainer;
 import io.jmix.flowui.view.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
 
@@ -65,7 +62,7 @@ public class MyOnboardingView extends StandardView {
                     return checkbox;
                 }));
 
-        DataGridHelper.setDataGridColumnPosition(stepsDataGrid, checkboxColumn, 0);
+        stepsDataGrid.setColumnPosition(checkboxColumn, 0);
 
         stepsDataGrid.getColumnByKey("dueDate")
                 .setClassNameGenerator(userStep ->

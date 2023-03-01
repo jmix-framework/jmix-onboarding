@@ -4,25 +4,17 @@ import com.company.onboarding.entity.OnboardingStatus;
 import com.company.onboarding.entity.Step;
 import com.company.onboarding.entity.User;
 import com.company.onboarding.entity.UserStep;
-import com.company.onboarding.view.DataGridHelper;
 import com.company.onboarding.view.main.MainView;
 import com.vaadin.flow.component.ClickEvent;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.checkbox.Checkbox;
 import com.vaadin.flow.component.combobox.ComboBox;
-import com.vaadin.flow.component.formlayout.FormLayout;
 import com.vaadin.flow.component.grid.Grid;
-import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.textfield.PasswordField;
-import com.vaadin.flow.component.upload.Upload;
-import com.vaadin.flow.component.upload.receivers.MemoryBuffer;
 import com.vaadin.flow.data.renderer.ComponentRenderer;
 import com.vaadin.flow.router.Route;
-import com.vaadin.flow.server.StreamResource;
 import io.jmix.core.DataManager;
 import io.jmix.core.EntityStates;
-import io.jmix.core.FileRef;
-import io.jmix.core.FileStorage;
 import io.jmix.flowui.Notifications;
 import io.jmix.flowui.UiComponents;
 import io.jmix.flowui.component.grid.DataGrid;
@@ -75,14 +67,6 @@ public class UserDetailView extends StandardDetailView<User> {
     @Autowired
     private UiComponents uiComponents;
 
-    @ViewComponent
-    private FormLayout form;
-
-    private Image image;
-
-    @Autowired
-    private FileStorage fileStorage;
-
     @Subscribe
     public void onInit(InitEvent event) {
         timeZoneField.setItems(List.of(TimeZone.getAvailableIDs()));
@@ -101,23 +85,7 @@ public class UserDetailView extends StandardDetailView<User> {
                 }))
                 .setWidth("50px"); // width doesn't work
 
-        DataGridHelper.setDataGridColumnPosition(stepsDataGrid, checkboxColumn, 0);
-
-        MemoryBuffer memoryBuffer = new MemoryBuffer();
-        Upload upload = new Upload(memoryBuffer);
-        upload.setMaxFiles(1);
-        upload.addFinishedListener(event1 -> {
-            FileRef fileRef = fileStorage.saveStream(memoryBuffer.getFileName(), memoryBuffer.getInputStream());
-            getEditedEntity().setPicture(fileRef);
-            updateImage();
-        });
-        form.add(upload);
-
-        image = new Image();
-        image.setHeight("200px");
-        image.setWidth("200px");
-        image.addClassName("user-picture");
-        form.add(image);
+        stepsDataGrid.setColumnPosition(checkboxColumn, 0);
     }
 
     @Subscribe
@@ -133,18 +101,6 @@ public class UserDetailView extends StandardDetailView<User> {
     public void onReady(ReadyEvent event) {
         if (entityStates.isNew(getEditedEntity())) {
             usernameField.focus();
-        }
-
-        updateImage();
-    }
-
-    private void updateImage() {
-        FileRef fileRef = getEditedEntity().getPicture();
-        if (fileRef != null) {
-            StreamResource streamResource = new StreamResource(
-                    fileRef.getFileName(),
-                    () -> fileStorage.openStream(fileRef));
-            image.setSrc(streamResource);
         }
     }
 
