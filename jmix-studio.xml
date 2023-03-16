@@ -22,11 +22,17 @@
       </entry>
       <entry key="onboarding.main">
         <ModuleSettings>
-          <option name="dataStoreOptions">
+          <option name="dataStoreOptionsV2">
             <map>
               <entry key="main">
                 <value>
-                  <DataStoreSettings />
+                  <DataStoreSettingsV2>
+                    <option name="generateDdlType" value="CREATE_AND_UPDATE" />
+                    <option name="nameLengthMode" value="ORACLE" />
+                    <option name="supportedTypes">
+                      <option value="postgres" />
+                    </option>
+                  </DataStoreSettingsV2>
                 </value>
               </entry>
             </map>
@@ -34,5 +40,19 @@
         </ModuleSettings>
       </entry>
     </moduleSettings>
+  </component>
+  <component name="JmixPluginProjectSettings">
+    <option name="savedDbProperties">
+      <list>
+        <SavedDbProperties>
+          <option name="databaseName" value="onboarding" />
+          <option name="dbType" value="hsqlfile" />
+          <option name="dbmsVersion" />
+          <option name="host" value=".jmix/hsqldb" />
+          <option name="url" value="jdbc:hsqldb:file:.jmix/hsqldb/onboarding" />
+          <option name="user" value="sa" />
+        </SavedDbProperties>
+      </list>
+    </option>
   </component>
 </project>

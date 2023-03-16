@@ -1,6 +1,7 @@
 plugins {
     id 'io.jmix' version '1.5.0'
     id 'java'
+    id 'org.liquibase.gradle' version '2.2.0'
 }
 
 apply plugin: 'org.springframework.boot'
@@ -36,14 +37,31 @@ dependencies {
 
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
-    runtimeOnly 'org.hsqldb:hsqldb'
 
     testImplementation('org.springframework.boot:spring-boot-starter-test') {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
     implementation 'io.jmix.gridexport:jmix-gridexport-flowui-starter'
+    implementation 'org.postgresql:postgresql'
+
+    liquibaseRuntime 'info.picocli:picocli:4.6.1'
+    liquibaseRuntime sourceSets.main.output
 }
 
 test {
     useJUnitPlatform()
+}
+
+configurations.liquibaseRuntime.extendsFrom configurations.runtimeClasspath
+
+liquibase {
+    activities {
+        main {
+            changelogFile 'src/main/resources/com/company/onboarding/liquibase/changelog.xml'
+            url 'jdbc:postgresql://localhost/onboarding-webinar-15'
+            username 'root'
+            password 'root'
+            logLevel 'info'
+        }
+    }
 }
