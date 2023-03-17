@@ -11,6 +11,9 @@
     <property name="uuid.type" dbms="!oracle" value="uuid"/>
     <include file="/io/jmix/data/liquibase/changelog.xml"/>
     <include file="/io/jmix/securitydata/liquibase/changelog.xml"/>
+    <include file="/io/jmix/quartz/liquibase/changelog.xml"/>
+    <include file="/io/jmix/multitenancy/liquibase/changelog.xml"/>
+    <include file="/io/jmix/audit/liquibase/changelog.xml"/>
 
     <includeAll path="/com/company/onboarding/liquibase/changelog"/>
 

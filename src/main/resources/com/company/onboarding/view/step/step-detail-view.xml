@@ -5,9 +5,20 @@
     <data>
         <instance id="stepDc"
                   class="com.company.onboarding.entity.Step">
-            <fetchPlan extends="_base"/>
+            <fetchPlan extends="_base">
+                <property name="tags" fetchPlan="_base"/>
+            </fetchPlan>
             <loader/>
         </instance>
+        <collection class="com.company.onboarding.entity.Tag" id="tagsDc">
+            <fetchPlan extends="_base"/>
+            <loader id="tagsDl">
+                <query>
+                    <![CDATA[select e from Tag e
+                    order by e.name asc]]>
+                </query>
+            </loader>
+        </collection>
     </data>
     <facets>
         <dataLoadCoordinator auto="true"/>
@@ -21,6 +32,7 @@
             <textField id="nameField" property="name"/>
             <textField id="durationField" property="duration"/>
             <textField id="sortValueField" property="sortValue"/>
+            <multiSelectComboBox property="tags" itemsContainer="tagsDc" id="tagsField"/>
         </formLayout>
         <hbox id="detailActions">
             <button id="commitAndCloseBtn" action="commitAction"/>

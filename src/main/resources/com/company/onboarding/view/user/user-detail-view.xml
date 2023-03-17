@@ -32,41 +32,51 @@
         <dataLoadCoordinator auto="true"/>
     </facets>
     <layout>
-        <formLayout id="form" dataContainer="userDc">
-            <textField id="usernameField" property="username" readOnly="true"/>
-            <passwordField id="passwordField"
-                           label="msg://com.company.onboarding.entity/User.password"
-                           required="true"
-                           visible="false"/>
-            <passwordField id="confirmPasswordField"
-                           label="msg://confirmPassword"
-                           required="true"
-                           visible="false"/>
-            <textField id="firstNameField" property="firstName"/>
-            <textField id="lastNameField" property="lastName"/>
-            <textField id="emailField" property="email"/>
-            <comboBox id="timeZoneField" property="timeZoneId"/>
-            <checkbox id="activeField" property="active"/>
-            <entityComboBox id="departmentField" property="department" itemsContainer="departmentsDc"/>
-            <datePicker id="joiningDateField" property="joiningDate"/>
-            <comboBox id="onboardingStatusField" property="onboardingStatus"/>
-            <fileStorageUploadField id="uploadField" dataContainer="userDc" property="picture"/>
-            <image id="image" dataContainer="userDc" property="picture" height="280px" width="200px" classNames="user-picture"/>
-        </formLayout>
-        <hbox>
-            <button id="generateStepsButton" text="Generate"/>
-            <button action="stepsDataGrid.remove"/>
-        </hbox>
-        <dataGrid width="100%" dataContainer="stepsDc" minHeight="10em" id="stepsDataGrid">
-            <columns>
-                <column property="step"/>
-                <column property="dueDate"/>
-                <column property="completedDate"/>
-            </columns>
-            <actions>
-                <action id="remove" type="remove"/>
-            </actions>
-        </dataGrid>
+        <tabSheet width="100%">
+            <tab id="main" label="Main">
+                <formLayout id="form" dataContainer="userDc">
+                    <textField id="usernameField" property="username" readOnly="true"/>
+                    <passwordField id="passwordField"
+                                   label="msg://com.company.onboarding.entity/User.password"
+                                   required="true"
+                                   visible="false"/>
+                    <passwordField id="confirmPasswordField"
+                                   label="msg://confirmPassword"
+                                   required="true"
+                                   visible="false"/>
+                    <textField id="firstNameField" property="firstName"/>
+                    <textField id="lastNameField" property="lastName"/>
+                    <textField id="emailField" property="email"/>
+                    <comboBox id="timeZoneField" property="timeZoneId"/>
+                    <checkbox id="activeField" property="active"/>
+                    <entityComboBox id="departmentField" property="department" itemsContainer="departmentsDc"/>
+                    <datePicker id="joiningDateField" property="joiningDate"/>
+                    <comboBox id="onboardingStatusField" property="onboardingStatus">
+                        <tooltip text="Updated automatically based on completed onboarding steps"/>
+                    </comboBox>
+                    <fileStorageUploadField id="uploadField" dataContainer="userDc" property="picture"/>
+                    <image id="image" dataContainer="userDc" property="picture" height="280px" width="200px" classNames="user-picture"/>
+                </formLayout>
+            </tab>
+            <tab id="steps" label="Onboarding steps">
+                <vbox>
+                    <hbox>
+                        <button id="generateStepsButton" text="Generate"/>
+                        <button action="stepsDataGrid.remove"/>
+                    </hbox>
+                    <dataGrid width="100%" dataContainer="stepsDc" minHeight="10em" id="stepsDataGrid">
+                        <columns>
+                            <column property="step"/>
+                            <column property="dueDate"/>
+                            <column property="completedDate"/>
+                        </columns>
+                        <actions>
+                            <action id="remove" type="remove"/>
+                        </actions>
+                    </dataGrid>
+                </vbox>
+            </tab>
+        </tabSheet>
         <hbox id="detailActions">
             <button id="commitAndCloseBtn" action="saveAction"/>
             <button id="closeBtn" action="closeAction"/>

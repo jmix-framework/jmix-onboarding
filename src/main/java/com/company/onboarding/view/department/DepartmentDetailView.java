@@ -10,4 +10,9 @@ import io.jmix.flowui.view.*;
 @ViewDescriptor("department-detail-view.xml")
 @EditedEntityContainer("departmentDc")
 public class DepartmentDetailView extends StandardDetailView<Department> {
+
+    @Subscribe
+    public void onInit(InitEvent event) {
+
+    }
 }

@@ -46,6 +46,14 @@ dependencies {
 
     liquibaseRuntime 'info.picocli:picocli:4.6.1'
     liquibaseRuntime sourceSets.main.output
+    implementation 'io.jmix.appsettings:jmix-appsettings-flowui-starter'
+    implementation 'io.jmix.appsettings:jmix-appsettings-starter'
+    implementation 'io.jmix.audit:jmix-audit-flowui-starter'
+    implementation 'io.jmix.audit:jmix-audit-starter'
+    implementation 'io.jmix.quartz:jmix-quartz-starter'
+    implementation 'io.jmix.quartz:jmix-quartz-flowui-starter'
+    implementation 'io.jmix.multitenancy:jmix-multitenancy-flowui-starter'
+    implementation 'io.jmix.multitenancy:jmix-multitenancy-starter'
 }
 
 test {

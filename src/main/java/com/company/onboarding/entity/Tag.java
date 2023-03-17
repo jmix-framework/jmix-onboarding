@@ -6,13 +6,12 @@ import io.jmix.core.metamodel.annotation.JmixEntity;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import java.util.List;
 import java.util.UUID;
 
 @JmixEntity
-@Table(name = "STEP")
+@Table(name = "TAG")
 @Entity
-public class Step {
+public class Tag {
     @JmixGeneratedValue
     @Column(name = "ID", nullable = false)
     @Id
@@ -26,45 +25,6 @@ public class Step {
     @InstanceName
     @Column(name = "NAME", nullable = false)
     private String name;
-
-    @NotNull
-    @Column(name = "DURATION", nullable = false)
-    private Integer duration;
-
-    @Column(name = "SORT_VALUE", nullable = false)
-    @NotNull
-    private Integer sortValue;
-
-    @JoinTable(name = "STEP_TAG_LINK",
-            joinColumns = @JoinColumn(name = "STEP_ID", referencedColumnName = "ID"),
-            inverseJoinColumns = @JoinColumn(name = "TAG_ID", referencedColumnName = "ID"))
-    @OrderBy("name")
-    @ManyToMany
-    private List<Tag> tags;
-
-    public List<Tag> getTags() {
-        return tags;
-    }
-
-    public void setTags(List<Tag> tags) {
-        this.tags = tags;
-    }
-
-    public Integer getSortValue() {
-        return sortValue;
-    }
-
-    public void setSortValue(Integer sortValue) {
-        this.sortValue = sortValue;
-    }
-
-    public Integer getDuration() {
-        return duration;
-    }
-
-    public void setDuration(Integer duration) {
-        this.duration = duration;
-    }
 
     public String getName() {
         return name;

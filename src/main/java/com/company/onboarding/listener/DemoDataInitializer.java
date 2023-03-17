@@ -1,9 +1,6 @@
 package com.company.onboarding.listener;
 
-import com.company.onboarding.entity.Department;
-import com.company.onboarding.entity.Step;
-import com.company.onboarding.entity.User;
-import com.company.onboarding.entity.UserStep;
+import com.company.onboarding.entity.*;
 import io.jmix.core.DataManager;
 import io.jmix.core.FileRef;
 import io.jmix.core.FileStorage;
@@ -43,10 +40,43 @@ public class DemoDataInitializer {
         if (dataManager.load(Step.class).all().maxResults(1).list().size() > 0) {
             return;
         }
+        initTags();
         List<Step> steps = initSteps();
         List<Department> departments = initDepartments();
         List<User> users = initUsers(steps, departments);
         assignRoles(users);
+    }
+
+    private void initTags() {
+        Tag tag;
+
+        tag = dataManager.create(Tag.class);
+        tag.setName("Security");
+        dataManager.save(tag);
+
+        tag = dataManager.create(Tag.class);
+        tag.setName("Learning");
+        dataManager.save(tag);
+
+        tag = dataManager.create(Tag.class);
+        tag.setName("Easy");
+        dataManager.save(tag);
+
+        tag = dataManager.create(Tag.class);
+        tag.setName("Setup");
+        dataManager.save(tag);
+
+        tag = dataManager.create(Tag.class);
+        tag.setName("Requires review");
+        dataManager.save(tag);
+
+        tag = dataManager.create(Tag.class);
+        tag.setName("In a group");
+        dataManager.save(tag);
+
+        tag = dataManager.create(Tag.class);
+        tag.setName("Some very long description");
+        dataManager.save(tag);
     }
 
     private List<Step> initSteps() {

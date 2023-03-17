@@ -21,13 +21,23 @@
     </actions>
     <facets>
         <dataLoadCoordinator auto="true"/>
+        <queryParameters>
+            <genericFilter component="filter"/>
+        </queryParameters>
     </facets>
     <layout expand="usersTable">
+        <genericFilter dataLoader="usersDl" summaryText="Filter" id="filter">
+            <responsiveSteps>
+                <responsiveStep minWidth="0" columns="1"/>
+                <responsiveStep minWidth="800px" columns="2"/>
+            </responsiveSteps>
+        </genericFilter>
         <hbox id="buttonsPanel" classNames="buttons-panel">
             <button id="createBtn" action="usersTable.create"/>
             <button id="editBtn" action="usersTable.edit"/>
             <button id="removeBtn" action="usersTable.remove"/>
             <button id="showRoleAssignmentsBtn" action="usersTable.showRoleAssignments"/>
+            <button action="usersTable.excel"/>
             <simplePagination dataLoader="usersDl" itemsPerPageVisible="true"/>
         </hbox>
         <dataGrid id="usersTable"
@@ -39,6 +49,7 @@
                 <action id="edit" type="edit"/>
                 <action id="remove" type="remove"/>
                 <action id="showRoleAssignments" type="showRoleAssignments"/>
+                <action id="excel" type="excelExport"/>
             </actions>
             <columns>
                 <column property="username"/>
