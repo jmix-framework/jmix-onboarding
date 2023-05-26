@@ -50,8 +50,12 @@
             <entityComboBox id="departmentField" property="department" itemsContainer="departmentsDc"/>
             <datePicker id="joiningDateField" property="joiningDate"/>
             <comboBox id="onboardingStatusField" property="onboardingStatus"/>
-            <fileStorageUploadField id="uploadField" dataContainer="userDc" property="picture"/>
-            <image id="image" dataContainer="userDc" property="picture" height="10em" width="10em" classNames="user-picture"/>
+            <details summaryText="Picture">
+                <hbox>
+                    <fileStorageUploadField id="uploadField" dataContainer="userDc" property="picture"/>
+                    <image id="image" dataContainer="userDc" property="picture" height="10em" width="10em" classNames="user-picture"/>
+                </hbox>
+            </details>
         </formLayout>
         <hbox>
             <button id="generateStepsButton" text="Generate"/>
