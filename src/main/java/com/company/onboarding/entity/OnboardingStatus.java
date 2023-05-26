@@ -2,7 +2,7 @@ package com.company.onboarding.entity;
 
 import io.jmix.core.metamodel.datatype.impl.EnumClass;
 
-import javax.annotation.Nullable;
+import jakarta.annotation.Nullable;
 
 
 public enum OnboardingStatus implements EnumClass<Integer> {

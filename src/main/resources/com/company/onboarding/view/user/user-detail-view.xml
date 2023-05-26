@@ -51,7 +51,7 @@
             <datePicker id="joiningDateField" property="joiningDate"/>
             <comboBox id="onboardingStatusField" property="onboardingStatus"/>
             <fileStorageUploadField id="uploadField" dataContainer="userDc" property="picture"/>
-            <image id="image" dataContainer="userDc" property="picture" height="280px" width="200px" classNames="user-picture"/>
+            <image id="image" dataContainer="userDc" property="picture" height="10em" width="10em" classNames="user-picture"/>
         </formLayout>
         <hbox>
             <button id="generateStepsButton" text="Generate"/>
